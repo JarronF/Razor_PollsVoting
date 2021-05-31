@@ -1,0 +1,13 @@
+﻿@page
+@model Razor_PollsVoting.Pages.IndexModel
+
+@using Razor_PollsVoting.Data.Models
+
+@foreach (Poll poll in Model.Polls)
+{
+    <div>
+        <h2>@poll.PollQuestion</h2>
+        <div>Date Entered: @poll.DateEntered</div>
+        <div>Expiration Date: @poll.ExpirationDate</div>
+    </div>
+}
