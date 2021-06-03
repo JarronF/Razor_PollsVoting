@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,5 +13,8 @@ namespace Razor_PollsVoting.Data.Models
         public int Count { get; set; }
         public double Percentage { get; set; }        
         public Poll Poll { get; set; }
+
+        [NotMapped]
+        public bool UserPicked { get; set; }
     }
 }

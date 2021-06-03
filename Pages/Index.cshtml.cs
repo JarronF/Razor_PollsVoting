@@ -19,8 +19,7 @@ namespace Razor_PollsVoting.Pages
         public List<Poll> Polls;
         [BindProperty]
         public int choiceSelected { get; set; }
-
-        public bool pollHasBeenAnswered { get; set; }
+        public string UserPickedClass { get; set; }
         public IndexModel(IPollRepository pollRepo, IHttpContextAccessor httpContextAccessor)
         {
             _pollRepo = pollRepo;
@@ -39,29 +38,28 @@ namespace Razor_PollsVoting.Pages
 
                 //2.2  If the IP address has answered then flag that.
                 var choice_answered = await _pollRepo.LoadAnsweredStatusAsync(itm.PollId, clientIP);
-
                 if (choice_answered == null)
                 {
-                    //itm.BeenAnswered = false;
+                    itm.BeenAnswered = false;
                 }
                 else
                 {
-                    //itm.BeenAnswered = true;
-
+                    itm.BeenAnswered = true;
                     // 2.3  Track down which choice was picked.                    
                     foreach (var choice in itm.Choices)
                     {
                         if (choice.ChoiceId == choice_answered)
                         {
-                           // choice.UserPicked = true;
+                            choice.UserPicked = true;
                         }
                     }
                 }
+
             }
         }
         public async Task<IActionResult> OnPostAsync(int pollID)
         {
-            VotingData vote = new VotingData()
+            Vote vote = new Vote()
             {
                 IPAddress = clientIP,
                 ChoiceId = choiceSelected,
@@ -70,8 +68,9 @@ namespace Razor_PollsVoting.Pages
             };
 
             await _pollRepo.CreateVoteData(vote);
+//            await _pollRepo.UpdateChoiceCount(vote.ChoiceId);
+
             return RedirectToPage("Index");
         }
-
     }
 }

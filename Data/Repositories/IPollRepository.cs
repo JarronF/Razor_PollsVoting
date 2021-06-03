@@ -11,7 +11,7 @@ namespace Razor_PollsVoting.Data.Repositories
     {
         public Task<List<Poll>> GetPollsAsync(string clientIP);
         public Task CreatePollAsync(Poll poll);
-        public Task CreateVoteData(VotingData vote);
+        public Task CreateVoteData(Vote vote);
         public Task<List<Choice>> LoadPollChoicesAsync(int pollId);
         public Task<int?> LoadAnsweredStatusAsync(int pollId, string clientIP);
     }

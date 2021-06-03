@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Razor_PollsVoting.Data.Models
 {
-    public class VotingData
+    public class Vote
     {
-        public int VotingDataId { get; set; }
+        public int VoteId { get; set; }
         public int PollId { get; set; }
         public string IPAddress { get; set; }
         public int ChoiceId { get; set; }

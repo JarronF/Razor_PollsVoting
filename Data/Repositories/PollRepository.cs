@@ -31,7 +31,7 @@ namespace Razor_PollsVoting.Data.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task CreateVoteData(VotingData vote)
+        public async Task CreateVoteData(Vote vote)
         {
             _db.Add(vote);
             await _db.SaveChangesAsync();
@@ -49,7 +49,7 @@ namespace Razor_PollsVoting.Data.Repositories
 
         public async Task<int?> LoadAnsweredStatusAsync(int pollId, string clientIP)
         {
-            var voted = await _db.VotingData
+            var voted = await _db.Vote
                 .FirstOrDefaultAsync(vote => vote.PollId == pollId && vote.IPAddress == clientIP);
 
             if (voted != null) 

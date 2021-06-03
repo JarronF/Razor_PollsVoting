@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Razor_PollsVoting.Data.Models
 {
@@ -13,5 +14,8 @@ namespace Razor_PollsVoting.Data.Models
         [Display(Name = "Expires")]
         public DateTime ExpirationDate { get; set; }
         public ICollection<Choice> Choices { get; set; }
+
+        [NotMapped]
+        public bool BeenAnswered { get; set; }
     }
 }

@@ -66,9 +66,9 @@ namespace Razor_PollsVoting.Migrations
                     b.ToTable("Poll");
                 });
 
-            modelBuilder.Entity("Razor_PollsVoting.Data.Models.VotingData", b =>
+            modelBuilder.Entity("Razor_PollsVoting.Data.Models.Vote", b =>
                 {
-                    b.Property<int>("VotingDataId")
+                    b.Property<int>("VoteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -85,9 +85,9 @@ namespace Razor_PollsVoting.Migrations
                     b.Property<int>("PollId")
                         .HasColumnType("int");
 
-                    b.HasKey("VotingDataId");
+                    b.HasKey("VoteId");
 
-                    b.ToTable("VotingData");
+                    b.ToTable("Vote");
                 });
 
             modelBuilder.Entity("Razor_PollsVoting.Data.Models.Choice", b =>

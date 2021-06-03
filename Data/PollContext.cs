@@ -12,7 +12,7 @@ namespace Razor_PollsVoting.Data
         public PollContext(DbContextOptions<PollContext> options) : base(options) { }
         public DbSet<Poll> Poll { get; set; }
         public DbSet<Choice> Choice { get; set; }
-        public DbSet<VotingData> VotingData { get; set; }
+        public DbSet<Vote> Vote { get; set; }
 
         ////public Task<int> SaveChangesAsync()
         ////{

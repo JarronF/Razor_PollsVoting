@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Razor_PollsVoting.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialiseAndCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,6 @@ namespace Razor_PollsVoting.Migrations
                     PollId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PollQuestion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BeenAnswered = table.Column<bool>(type: "bit", nullable: false),
                     DateEntered = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -24,10 +23,10 @@ namespace Razor_PollsVoting.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VotingData",
+                name: "Vote",
                 columns: table => new
                 {
-                    VotingDataId = table.Column<int>(type: "int", nullable: false)
+                    VoteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PollId = table.Column<int>(type: "int", nullable: false),
                     IPAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -36,7 +35,7 @@ namespace Razor_PollsVoting.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VotingData", x => x.VotingDataId);
+                    table.PrimaryKey("PK_Vote", x => x.VoteId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,7 +47,6 @@ namespace Razor_PollsVoting.Migrations
                     ChoiceText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Count = table.Column<int>(type: "int", nullable: false),
                     Percentage = table.Column<double>(type: "float", nullable: false),
-                    UserPicked = table.Column<bool>(type: "bit", nullable: false),
                     PollId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -74,7 +72,7 @@ namespace Razor_PollsVoting.Migrations
                 name: "Choice");
 
             migrationBuilder.DropTable(
-                name: "VotingData");
+                name: "Vote");
 
             migrationBuilder.DropTable(
                 name: "Poll");

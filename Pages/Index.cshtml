@@ -16,13 +16,31 @@ else
     @foreach (Poll poll in Model.Polls)
     {
         <div class="questionBox">
-            @if (Model.pollHasBeenAnswered)
+            @if (poll.BeenAnswered)
             {
-            <div>
-                <h3 class="question">@poll.PollQuestion</h3>
-                <div class="expiration">Expiration Date: @poll.ExpirationDate</div>
-                <div class="responded">You responded on: @poll.DateEntered</div>
-            </div>
+                <div>
+                    <div>
+                        <h3 class="question">@poll.PollQuestion</h3>
+                        <div class="expiration"><i> Expiration Date: @poll.ExpirationDate</i></div>
+                        <br />
+                        @foreach (var choice in poll.Choices)
+                        {
+                            @if (choice.UserPicked)
+                            {
+                                Model.UserPickedClass = "userpicked";
+                            }
+                            else
+                            {
+                                Model.UserPickedClass = "";
+                            }
+                            <span class="@Model.UserPickedClass">
+                                @choice.ChoiceText : @choice.Percentage % (@choice.Count)
+                                <br />
+                            </span>
+                        }
+                    </div>
+                    <p class="responded">You responded on <i>@poll.DateEntered</i> by selecting the highlighted option.</p>
+                </div>
             }
             else
             {

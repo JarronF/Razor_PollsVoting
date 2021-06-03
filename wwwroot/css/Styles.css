@@ -16,8 +16,9 @@ textarea {
     width:30%;
 }
 
-.responded {
+.responded, .userpicked {
     font-style: italic;
     font-weight: bold;
     background-color: #ADD8E6;
 }
+
