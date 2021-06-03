@@ -17,6 +17,10 @@ namespace Razor_PollsVoting.Pages
         private readonly IHttpContextAccessor _accessor;
         private string clientIP { get; set; }
         public List<Poll> Polls;
+        [BindProperty]
+        public int choiceSelected { get; set; }
+
+        public bool pollHasBeenAnswered { get; set; }
         public IndexModel(IPollRepository pollRepo, IHttpContextAccessor httpContextAccessor)
         {
             _pollRepo = pollRepo;
@@ -27,6 +31,47 @@ namespace Razor_PollsVoting.Pages
         public async Task OnGetAsync()
         {
             Polls = await _pollRepo.GetPollsAsync(clientIP);
+
+            foreach (var itm in Polls)
+            {
+                //2.1  Choices to get back.
+                itm.Choices = await _pollRepo.LoadPollChoicesAsync(itm.PollId);
+
+                //2.2  If the IP address has answered then flag that.
+                var choice_answered = await _pollRepo.LoadAnsweredStatusAsync(itm.PollId, clientIP);
+
+                if (choice_answered == null)
+                {
+                    //itm.BeenAnswered = false;
+                }
+                else
+                {
+                    //itm.BeenAnswered = true;
+
+                    // 2.3  Track down which choice was picked.                    
+                    foreach (var choice in itm.Choices)
+                    {
+                        if (choice.ChoiceId == choice_answered)
+                        {
+                           // choice.UserPicked = true;
+                        }
+                    }
+                }
+            }
         }
+        public async Task<IActionResult> OnPostAsync(int pollID)
+        {
+            VotingData vote = new VotingData()
+            {
+                IPAddress = clientIP,
+                ChoiceId = choiceSelected,
+                PollId = pollID,
+                DateEntered = DateTime.Now
+            };
+
+            await _pollRepo.CreateVoteData(vote);
+            return RedirectToPage("Index");
+        }
+
     }
 }

@@ -2,3 +2,34 @@
 @model Razor_PollsVoting.Pages.AdminModel
 @{
 }
+<h4><a id="lnkIndex" asp-page="/Index">Polls area</a></h4>
+
+<h2>Welcome to the Admin page</h2>
+
+<form method="post">
+    <div>
+        <label for="txtQuestion">Please add your new poll question:</label>
+        <div>
+            <textarea type="text" id="txtQuestion" asp-for="Question"></textarea>
+        </div>
+        <br/>
+    </div>
+    <div>
+        <label for="dteExpiration">Enter the expiration date:</label>
+        <div>
+            <input type="date" id="dteExpiration" asp-for="ExpirationDate" />
+        </div>
+        <br />
+    </div>
+    <div>
+        <label for="txtChoices">Options / Choices:</label>
+        <label for="txtChoices">A new line denotes a new choice</label>
+        <div>
+            <textarea id="txtChoices" asp-for="Choices"></textarea>
+        </div>
+        <br />
+    </div>
+    <div>
+        <button type="submit" id="btnSubmit">Submit</button>
+    </div>
+</form>

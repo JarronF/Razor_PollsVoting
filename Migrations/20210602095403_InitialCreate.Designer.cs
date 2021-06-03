@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Razor_PollsVoting.Data;
 
 namespace Razor_PollsVoting.Migrations
 {
     [DbContext(typeof(PollContext))]
-    partial class PollContextModelSnapshot : ModelSnapshot
+    [Migration("20210602095403_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +40,9 @@ namespace Razor_PollsVoting.Migrations
                     b.Property<int?>("PollId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("UserPicked")
+                        .HasColumnType("bit");
+
                     b.HasKey("ChoiceId");
 
                     b.HasIndex("PollId");
@@ -51,6 +56,9 @@ namespace Razor_PollsVoting.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("BeenAnswered")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DateEntered")
                         .HasColumnType("datetime2");

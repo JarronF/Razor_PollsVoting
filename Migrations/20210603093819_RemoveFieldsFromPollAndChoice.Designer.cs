@@ -10,8 +10,8 @@ using Razor_PollsVoting.Data;
 namespace Razor_PollsVoting.Migrations
 {
     [DbContext(typeof(PollContext))]
-    [Migration("20210528125208_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210603093819_RemoveFieldsFromPollAndChoice")]
+    partial class RemoveFieldsFromPollAndChoice
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,9 +40,6 @@ namespace Razor_PollsVoting.Migrations
                     b.Property<int?>("PollId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("UserPicked")
-                        .HasColumnType("bit");
-
                     b.HasKey("ChoiceId");
 
                     b.HasIndex("PollId");
@@ -56,9 +53,6 @@ namespace Razor_PollsVoting.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("BeenAnswered")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DateEntered")
                         .HasColumnType("datetime2");
@@ -90,8 +84,8 @@ namespace Razor_PollsVoting.Migrations
                     b.Property<string>("IPAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PollId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PollId")
+                        .HasColumnType("int");
 
                     b.HasKey("VotingDataId");
 
@@ -100,9 +94,11 @@ namespace Razor_PollsVoting.Migrations
 
             modelBuilder.Entity("Razor_PollsVoting.Data.Models.Choice", b =>
                 {
-                    b.HasOne("Razor_PollsVoting.Data.Models.Poll", null)
+                    b.HasOne("Razor_PollsVoting.Data.Models.Poll", "Poll")
                         .WithMany("Choices")
                         .HasForeignKey("PollId");
+
+                    b.Navigation("Poll");
                 });
 
             modelBuilder.Entity("Razor_PollsVoting.Data.Models.Poll", b =>

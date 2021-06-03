@@ -3,11 +3,48 @@
 
 @using Razor_PollsVoting.Data.Models
 
-@foreach (Poll poll in Model.Polls)
+<h4><a id="lnkAdmin" asp-page="/Admin">Admin area</a></h4>
+
+<h2>Poll Results:</h2>
+@if (Model.Polls.Count == 0)
 {
-    <div>
-        <h2>@poll.PollQuestion</h2>
-        <div>Date Entered: @poll.DateEntered</div>
-        <div>Expiration Date: @poll.ExpirationDate</div>
-    </div>
+    <h3>No recent polls have been added</h3>
+    <p>Please add a poll via the Admin area</p>
+}
+else
+{
+    @foreach (Poll poll in Model.Polls)
+    {
+        <div class="questionBox">
+            @if (Model.pollHasBeenAnswered)
+            {
+            <div>
+                <h3 class="question">@poll.PollQuestion</h3>
+                <div class="expiration">Expiration Date: @poll.ExpirationDate</div>
+                <div class="responded">You responded on: @poll.DateEntered</div>
+            </div>
+            }
+            else
+            {
+                <div>
+                    <form method="post">
+                        <h3 class="question">@poll.PollQuestion</h3>
+                        <div class="expiration"><i> Expiration Date: @poll.ExpirationDate</i></div>
+                        <p><u>Choices:</u></p>
+                        @foreach (Choice item_choice in poll.Choices)
+                        {
+                            <span>
+                                <input type="radio" asp-for="choiceSelected" value="@item_choice.ChoiceId" id="rad_@(item_choice.ChoiceText.Replace(" ","_"))" />
+                                <label>@item_choice.ChoiceText</label>
+                                <br />
+                            </span>
+                        }
+                        <div>
+                            <input type="submit" asp-route-pollID="@poll.PollId" value="Submit Vote" style="margin-top:5px;" />
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
+    }
 }

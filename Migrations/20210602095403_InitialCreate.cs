@@ -29,7 +29,7 @@ namespace Razor_PollsVoting.Migrations
                 {
                     VotingDataId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PollId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PollId = table.Column<int>(type: "int", nullable: false),
                     IPAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ChoiceId = table.Column<int>(type: "int", nullable: false),
                     DateEntered = table.Column<DateTime>(type: "datetime2", nullable: false)
