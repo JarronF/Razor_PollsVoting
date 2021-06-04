@@ -35,6 +35,7 @@ namespace Razor_PollsVoting.Data.Repositories
         {
             _db.Add(vote);
             await _db.SaveChangesAsync();
+            await UpdateChoiceCount(vote);            
         }
 
         public async Task<List<Choice>> LoadPollChoicesAsync(int pollId)
@@ -52,10 +53,24 @@ namespace Razor_PollsVoting.Data.Repositories
             var voted = await _db.Vote
                 .FirstOrDefaultAsync(vote => vote.PollId == pollId && vote.IPAddress == clientIP);
 
-            if (voted != null) 
+            if (voted != null)
+            {
                 return voted.ChoiceId;
+            }
 
             return null;
+        }
+
+        private async Task<bool> UpdateChoiceCount(Vote vote)
+        {
+            var chc = await _db.Choice.FirstAsync(choice => choice.ChoiceId == vote.ChoiceId);
+            if (chc != null)
+            {
+                chc.Count += 1;               
+                _db.Update(chc);
+                return (await _db.SaveChangesAsync() > 0);
+            }
+            return false;
         }
     }
 }

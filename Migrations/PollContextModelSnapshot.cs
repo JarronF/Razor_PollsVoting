@@ -32,9 +32,6 @@ namespace Razor_PollsVoting.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<double>("Percentage")
-                        .HasColumnType("float");
-
                     b.Property<int?>("PollId")
                         .HasColumnType("int");
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Razor_PollsVoting.Migrations
 {
-    public partial class InitialiseAndCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,7 +46,6 @@ namespace Razor_PollsVoting.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ChoiceText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Count = table.Column<int>(type: "int", nullable: false),
-                    Percentage = table.Column<double>(type: "float", nullable: false),
                     PollId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

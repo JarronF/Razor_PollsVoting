@@ -10,8 +10,8 @@ using Razor_PollsVoting.Data;
 namespace Razor_PollsVoting.Migrations
 {
     [DbContext(typeof(PollContext))]
-    [Migration("20210603103241_InitialiseAndCreate")]
-    partial class InitialiseAndCreate
+    [Migration("20210604154135_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,6 @@ namespace Razor_PollsVoting.Migrations
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
-
-                    b.Property<double>("Percentage")
-                        .HasColumnType("float");
 
                     b.Property<int?>("PollId")
                         .HasColumnType("int");

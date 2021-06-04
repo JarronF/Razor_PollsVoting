@@ -10,11 +10,11 @@ namespace Razor_PollsVoting.Data.Models
     {
         public int ChoiceId { get; set; }
         public string ChoiceText { get; set; }
-        public int Count { get; set; }
-        public double Percentage { get; set; }        
+        public int Count { get; set; }         
         public Poll Poll { get; set; }
-
         [NotMapped]
         public bool UserPicked { get; set; }
+        [NotMapped]
+        public double Percentage { get; set; }
     }
 }
