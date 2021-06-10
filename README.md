@@ -3,7 +3,7 @@ This is a proof of concept poll / voting project. It allows you to add polls wit
 
 #### The project has the following features:
 * ASP.NET Razor Pages
-* Code-First data models
+* Code-First data models / data-migrations
 * EntityFramework Core and LINQ for data access
 * MSSQLLocalDB for storage
 * TODO: Basic unit testing (xUnit, MOQ)
