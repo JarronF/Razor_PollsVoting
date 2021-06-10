@@ -6,6 +6,7 @@ This is a proof of concept poll / voting project. It allows you to add polls wit
 * Code-First data models / data-migrations
 * EntityFramework Core and LINQ for data access
 * MSSQLLocalDB for storage
+* Dependency Injection
 * TODO: Basic unit testing (xUnit, MOQ)
 
 ## Admin Area (Admin.cshtml):
