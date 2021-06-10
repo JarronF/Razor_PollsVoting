@@ -16,3 +16,5 @@ If they re-enter the polls page after already voting they should be shown the re
 Each choice should indicate how many users have voted for it and the percentage of votes for each choice.
 
 The user should be informed when he entered his vote on that poll, and which vote he selected.
+
+![PollResults](https://user-images.githubusercontent.com/68229225/121528632-f3d92280-c9fb-11eb-9906-28a874874c31.png)
