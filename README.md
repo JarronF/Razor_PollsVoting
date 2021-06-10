@@ -10,9 +10,9 @@ This is a proof of concept poll / voting project. It allows you to add polls wit
 
 ## Admin Area (Admin.cshtml):
 
-* Create polls via the Admin page.
-* Each poll has an expiry date.
-* Each poll can have multiple choices. 
+* Basic creation of polls
+* Each poll has an expiry date
+* Each poll can have multiple choices
 
 ![AdminArea](https://user-images.githubusercontent.com/68229225/121529250-82e63a80-c9fc-11eb-829f-552d4b7e0839.png)
 
